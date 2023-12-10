@@ -1,16 +1,17 @@
 const fs = require('node:fs');
 
-fs.readFile('d1_input','utf8',(err,data)=>{
+fs.readFile('inputs/d1_input','utf8',(err,data)=>{
     if(err){
         console.log(err);
         return;
     }
 
     const lines = data.trim().split('\n');
-    console.log(answer1(lines));
+    console.log("Part 1:",answer(lines,false));
+    console.log("Part 2:",answer(lines,true));
 })
 
-function answer1(lines){
+function answer(lines,part2){
 
     const isDigit = (x)=>{
         return ['0','1','2','3','4','5','6','7','8','9'].includes(x);
@@ -20,7 +21,6 @@ function answer1(lines){
         const digits = ['zero','one','two','three','four','five','six','seven','eight','nine'];
         for(let j = 0 ; j < digits.length ; j++){
             const digit = digits[j];
-            //const x = line.substring(i,i+digit.length).indexOf(digit);
             if(line.substring(i,i+digit.length)==digit){
                 return [j,digit.length-1];
             }
@@ -37,21 +37,22 @@ function answer1(lines){
             }
 
             //Part 2
-            const [num,j] = strDigit(line,i);
-            if(j>=0){
-                i += j-1;
-                nums.push(num);
+            if(part2){
+                const [num,j] = strDigit(line,i);
+                if(j>=0){
+                    i += j-1;
+                    nums.push(num);
+                }
             }
             //Part2 end
         }
-        // console.log(nums)
         return 10*nums[0] + nums[nums.length-1];
     }
 
     let total = 0;
     for(const line of lines){
         const x = number(line);
-        // console.log(x,total);
+
         total+=x;
     }
 

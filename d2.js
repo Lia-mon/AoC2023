@@ -1,13 +1,14 @@
 const fs = require('node:fs');
 
-fs.readFile('d2_test','utf8',(err,data)=>{
+fs.readFile('inputs/d2_input','utf8',(err,data)=>{
     if(err){
         console.log(err);
         return;
     }
 
     const lines = data.trim().split('\n');
-    console.log(answerP2(lines));
+    console.log("Part 1:",answerP1(lines));
+    console.log("Part 2:",answerP2(lines));
 })
 
 // const maxVals = [12,13,14]; //red green blue
@@ -110,7 +111,7 @@ function evaluateP2(line){
 }
 
 
-function answer(lines){
+function answerP1(lines){
     return lines.reduce((s,line)=>(s+evaluateLine(line)),0);
 }
 
