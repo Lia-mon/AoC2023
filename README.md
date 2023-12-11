@@ -14,3 +14,4 @@ My [Advent of Code 2023](https://adventofcode.com/2023) solutions, written in ja
 |Day 8|✓ | ✓|
 |Day 9|✓ | ✓|
 |Day 10|✓ | ✓|
+|Day 11|✓ | ✓|
