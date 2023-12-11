@@ -84,32 +84,14 @@ function setStartSymbol(lines,friends,start){
             s = '|'
             break;
     }
-    //damn I am very lazy
+    //less lazy
+    const corners = [['J','L'],['7','F']];
     if(flag){
-        let down = false;
-        if(i1+i2 == 1){
-            down = true;
-        }
-        let right = false;
-        if(j1+j2 == 1){
-            right = true;
-        }
-        if(down && right){
-            s = 'F';
-        }
-        if(down && !right){
-            s = '7';
-        }
-        if(!down && right){
-            s = 'L';
-        }
-        if(!down && !right){
-            s = 'J';
-        }
+        let down = Math.max(i1+i2,0);
+        let right = Math.max(j1+j2,0);
+        s = corners[down][right];
     }
-
     lines[start[0]][start[1]] = s;
-
 }
 
 function answerP1(lines){
@@ -141,7 +123,6 @@ function answerP2(lines){
     const loop = new Map();
 
     while(i != start[0] || j != start[1]){
-
         loop.set(`${[i,j]}`,1);
         const pipe = lines[i][j];   
         d = nextDirection(pipe,d);
@@ -155,8 +136,8 @@ function answerP2(lines){
     let area = 0;
     let inner = false;
     let s = ''
-
     const vertical = ['|','F','L'];
+    //when tracing the loop, directional information + locality can make this faster/better
     for(let i = 0; i < lines.length; i++){
         inner = false;
         s = '';
